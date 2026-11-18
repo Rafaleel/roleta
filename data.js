@@ -35,7 +35,7 @@ window.DADOS = {
         "Mesa de estudo que fica brava com distrações",
         "Bloco de notas que esquece tudo o que você escreveu",
         "Escorregador que leva da cama direto para a sala de aula",
-        "Ampulheta que acelera no recreio",
+        "Ampulheta que mostra quanto falta para as férias",
         "Relógio que adianta a hora do recreio",
         "Agenda que lembra o que você esqueceu de esquecer",
         "Calendário com um dia extra de folga por mês",
@@ -45,6 +45,7 @@ window.DADOS = {
         "Giz de cera que desenha sozinho",
         "Tinta que muda de cor com a temperatura do dia",
         "Pincel com pelo de unicórnio sintético",
+        "Mochila com freezer embutido",
         "Fone de ouvido que filtra a voz do professor (só a parte chata)"
       ],
       publicos: [
@@ -117,7 +118,7 @@ window.DADOS = {
         "só pode ser servido no café da manhã",
         "muda de sabor sem avisar",
         "precisa ser aprovado por uma avó",
-        "só pode ser comido de pauzinho",
+        "só pode ser consumido de olhos fechados",
         "vem em porções do tamanho de um grão de arroz",
         "tem que durar uma semana fora da geladeira",
         "faz barulho de pato a cada mordida",
@@ -141,11 +142,11 @@ window.DADOS = {
         "Canudo que toca música",
         "Guardanapo que limpa e elogia",
         "Lancheira que escolhe o seu lanche",
-        "Mochila com freezer embutido",
         "Chaleira que apita a música favorita da família",
         "Espátula que vira panquecas com mortal triplo",
         "Lava-louças que conversa com os pratos sobre a vida",
-        "Abridor de latas que pede licença antes de abrir"
+        "Abridor de latas que pede licença antes de abrir",
+        "Garrafa d'água que sente sede"
       ],
       publicos: [
         "para quem mora em apartamento minúsculo",
@@ -190,7 +191,7 @@ window.DADOS = {
         "Almofada antiestresse que ri quando apertada",
         "Vassoura autônoma com carteira de motorista",
         "Aspirador de pó que coleciona as sujeiras",
-        "Robô que faz a cama e conta o placar",
+        "Robô que esconde a bagunça debaixo da cama",
         "Lixeira que agradece pelo lixo reciclado",
         "Balde que sempre tem água pela metade",
         "Controle remoto que acha a si mesmo",
@@ -354,7 +355,7 @@ window.DADOS = {
         "Drone que entrega bilhetinhos na sala de aula",
         "Óculos de realidade virtual que mostram o seu quarto arrumado",
         "Emoji que pula para fora da tela",
-        "Impressora 3D que só imprime miniaturas de capivara"
+        "Impressora 3D que imprime o lanche que você desenhar"
       ],
       publicos: [
         "para avós que amam tecnologia",
@@ -394,10 +395,10 @@ window.DADOS = {
         "Robô aspirador que adota um gato",
         "Arranhador de gato que aplaude quando é arranhado",
         "Óculos de leitura para corujas",
-        "Patins para tartarugas apressadas",
+        "Patins turbo para caramujos",
         "Guarda-chuva para passarinhos",
         "Hotel cinco estrelas para minhocas",
-        "Tradutor de miado para latido",
+        "Ninho de passarinho com campainha",
         "Papagaio que só repete elogios",
         "Bicicleta ergométrica para hamsters preguiçosos"
       ],
@@ -426,11 +427,45 @@ window.DADOS = {
       ]
     },
     {
-      nome: "Esportes e brincadeiras",
+      nome: "Esportes",
       produtos: [
         "Bola de futebol que sempre acha o gol",
         "Bola de vôlei que nunca cai",
         "Raquete com raquetada automática",
+        "Bola de basquete que pede desculpas quando erra a cesta",
+        "Apito de juiz que só apita jogadas bonitas",
+        "Patins com freio de mão",
+        "Skate com piloto automático",
+        "Patinete movido a gargalhadas",
+        "Rede de gol que se mexe para ajudar o goleiro",
+        "Corda de pular que conta piadas a cada pulo",
+        "Medalha que se entrega sozinha para quem tentou",
+        "Tênis de corrida que reclama das subidas"
+      ],
+      publicos: [
+        "para jogadores de futebol de várzea",
+        "para atletas de soneca olímpica",
+        "para professores de Educação Física",
+        "para avós que querem ser campeãs de skate",
+        "para times que nunca ganharam nada",
+        "para juízes de futebol que ninguém respeita",
+        "para centopeias que querem ser atletas",
+        "para quem nunca fez exercício na vida"
+      ],
+      reviravoltas: [
+        "só funciona no intervalo da competição",
+        "tem que ser usado de olhos vendados",
+        "pesa mais que um elefante",
+        "dura apenas 1 minuto",
+        "só obedece a quem estiver dançando",
+        "só funciona se você estiver perdendo",
+        "precisa de dois usuários ao mesmo tempo",
+        "só funciona debaixo de chuva forte"
+      ]
+    },
+    {
+      nome: "Brinquedos e jogos",
+      produtos: [
         "Bambolê que gira sozinho",
         "Pipa que volta voando para casa",
         "Ioiô que conta segredos",
@@ -438,39 +473,31 @@ window.DADOS = {
         "Quebra-cabeça que se monta sozinho (mas esconde uma peça)",
         "Massinha de modelar que ganha vida",
         "Dado que sempre tira seis",
-        "Bola de basquete que pede desculpas quando erra a cesta",
-        "Apito de juiz que só apita jogadas bonitas",
         "Trampolim de bolso",
-        "Patins com freio de mão",
-        "Skate com piloto automático",
-        "Patinete movido a gargalhadas",
-        "Rede de gol que se mexe para ajudar o goleiro",
-        "Corda de pular que conta piadas a cada pulo",
         "Tabuleiro de xadrez em que as peças discutem",
         "Capa de esconde-esconde que só esconde metade do corpo",
-        "Medalha que se entrega sozinha para quem tentou"
+        "Boneco que arruma o próprio quarto",
+        "Jogo da memória que esquece onde estão as cartas"
       ],
       publicos: [
-        "para jogadores de futebol de várzea",
-        "para atletas de soneca olímpica",
-        "para professores de Educação Física",
-        "para quem sempre perde no par ou ímpar",
-        "para avós que querem ser campeãs de skate",
-        "para times que nunca ganharam um jogo",
         "para crianças de 5 anos muito exigentes",
-        "para juízes de futebol que ninguém respeita",
-        "para centopeias que jogam futebol"
+        "para avós que querem voltar a ser crianças",
+        "para quem sempre perde no par ou ímpar",
+        "para colecionadores de brinquedos antigos",
+        "para irmãos que brigam pelo mesmo brinquedo",
+        "para gatos que derrubam tudo da mesa",
+        "para crianças que nunca guardam os brinquedos",
+        "para campeões de xadrez muito nervosos"
       ],
       reviravoltas: [
-        "só funciona no intervalo do jogo",
-        "tem que ser usado de olhos vendados",
-        "pesa mais que um elefante",
-        "dura apenas 1 minuto",
+        "só funciona no Dia das Crianças",
         "é totalmente feito de papelão",
-        "só obedece a quem estiver dançando",
-        "só funciona se o time estiver perdendo",
+        "vem em 47 peças para montar",
         "precisa de dois usuários ao mesmo tempo",
-        "vem em 47 peças para montar"
+        "dura apenas 1 minuto",
+        "tem que caber no bolso",
+        "brilha no escuro (e não desliga)",
+        "só funciona quando ninguém está olhando"
       ]
     },
     {
@@ -551,7 +578,7 @@ window.DADOS = {
         "para jardineiros sem paciência",
         "para quem mata até cacto",
         "para minhocas que querem ver o sol",
-        "para cidades onde nunca chove",
+        "para moradores de cidades onde nunca chove",
         "para meteorologistas que sempre erram",
         "para quem tem medo de trovão",
         "para vovós que conversam com as plantas",
@@ -577,15 +604,12 @@ window.DADOS = {
         "Estrela cadente de estimação",
         "Binóculo que enxerga o futuro (só 5 minutos)",
         "Lanterna que ilumina ideias",
-        "Lupa que aumenta a autoestima",
-        "Ímã que atrai boas notícias",
         "Microscópio que encontra a última migalha do pacote",
         "Traje espacial com bolso para lanche de 3 meses",
         "Vulcão de mesa que entra em erupção com espuma de sabão",
         "Satélite que tira selfies da Terra",
         "Robô que coleciona pedras de Marte e dá nome a elas",
-        "Gravidade em spray para dias em que nada para no lugar",
-        "Garrafa d'água que sente sede"
+        "Gravidade em spray para dias em que nada para no lugar"
       ],
       publicos: [
         "para astronautas aposentados",
@@ -633,13 +657,13 @@ window.DADOS = {
       ],
       publicos: [
         "para músicos de banda de garagem",
-        "para bandas de rock de idosos",
+        "para aniversariantes de 100 anos",
         "para quem canta no chuveiro",
         "para aniversariantes que odeiam surpresa",
         "para DJs de festa de família",
         "para vizinhos que reclamam do barulho",
         "para quem dança mal, mas dança mesmo assim",
-        "para corais de passarinhos",
+        "para avós que organizam as festas da família",
         "para fantasmas tímidos"
       ],
       reviravoltas: [
@@ -718,7 +742,9 @@ window.DADOS = {
         "Botão de desfazer para a vida real",
         "Controle remoto que pausa a bronca",
         "Óculos que mostram o lado bom de tudo",
-        "Detector de mentira em formato de pantufa"
+        "Detector de mentira em formato de pantufa",
+        "Lupa que aumenta a autoestima",
+        "Ímã que atrai boas notícias"
       ],
       publicos: [
         "para quem odeia segunda-feira",

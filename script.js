@@ -249,12 +249,19 @@
   const ctx = canvas.getContext("2d");
   let pedacos = [];
   let confeteRodando = false;
+  // Ajusta o canvas à janela (que pode mudar de tamanho ou zoom no meio da animação)
+  // e limpa tudo em pixels reais; limpar só innerWidth×innerHeight deixava rastros.
+  function prepararCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    const w = Math.round(innerWidth * dpr), h = Math.round(innerHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
   function confete() {
     if (menosMovimento()) return;
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = innerWidth * dpr;
-    canvas.height = innerHeight * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    prepararCanvas();
     const cores = ["#8b5cf6", "#ff6b6b", "#ffd23f", "#2ec4b6", "#f472b6", "#ffffff"];
     const qtd = innerWidth < 600 ? 120 : 220;
     for (let i = 0; i < qtd; i++) {
@@ -269,7 +276,7 @@
     if (!confeteRodando) { confeteRodando = true; requestAnimationFrame(animarConfete); }
   }
   function animarConfete() {
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    prepararCanvas();
     pedacos = pedacos.filter((p) => p.y < innerHeight + 40 && p.vida < 400);
     for (const p of pedacos) {
       p.vida++; p.vy += 0.32; p.vx *= 0.985; p.vy *= 0.985;
@@ -283,7 +290,7 @@
       ctx.restore();
     }
     if (pedacos.length) requestAnimationFrame(animarConfete);
-    else { confeteRodando = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+    else { confeteRodando = false; prepararCanvas(); }
   }
 
   /* ---------- Avisos ---------- */
@@ -365,7 +372,7 @@
       else if (base === produtos) {
         jaSorteados = [];
         avisar("Todos os produtos já saíram! A lista recomeçou.");
-      }
+      } else avisar("Todos os produtos deste tema já saíram, então este pode repetir.");
     }
     return pool;
   }
