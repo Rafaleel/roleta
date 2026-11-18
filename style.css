@@ -1,7 +1,7 @@
 :root {
   --bg: #1b1035;
   --bg2: #2a1a52;
-  --card: rgba(255, 255, 255, .07);
+  --card: #261a45; /* opaco: as formas do fundo não passam por trás do texto */
   --card-borda: rgba(255, 255, 255, .13);
   --texto: #fdfbff;
   --texto-suave: #cfc4ee;
@@ -203,7 +203,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 /* Tela da missão */
 .tela-missao { animation: entra .6s cubic-bezier(.2, 1.4, .4, 1) both; }
 .missao-topo { text-align: center; margin-bottom: 16px; }
-.missao-sorteio { display: grid; gap: 14px; margin-bottom: 18px; background: linear-gradient(135deg, rgba(139, 92, 246, .35), rgba(255, 107, 107, .22)); }
+.missao-sorteio { display: grid; gap: 14px; margin-bottom: 18px; background: linear-gradient(135deg, rgba(139, 92, 246, .35), rgba(255, 107, 107, .22)), var(--card); }
 .missao-sorteio p { margin: 6px 0 0; font-size: 1.15rem; font-weight: 600; }
 .missao-sorteio .m-produto { font-family: var(--fonte-titulo); font-size: clamp(1.6rem, 6vw, 2.4rem); color: var(--amarelo); line-height: 1.1; }
 .missao-grade { display: grid; gap: 16px; }
