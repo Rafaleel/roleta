@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roleta do Produto Absurdo</title>
+  <meta name="description" content="Gire a roleta, sorteie um produto absurdo e crie no Canva uma apresentação para vendê-lo. UNIPAMPA Cidadã · Módulo III.">
+  <meta name="theme-color" content="#1b1035">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="fundo" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="topo">
+    <a class="marca" href="./" aria-label="Roleta do Produto Absurdo, página inicial">
+      <img src="favicon.svg" alt="" width="40" height="40">
+      <span>Roleta do <strong>Produto Absurdo</strong></span>
+    </a>
+    <nav class="acoes-topo" aria-label="Opções">
+      <button type="button" class="btn-icone" id="btnSom" aria-pressed="false" title="Ligar som">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="som-on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="som-off" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span id="txtSom">Som desligado</span>
+      </button>
+      <button type="button" class="btn-icone" id="btnProjetor" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="txtProjetor">Modo projetor</span>
+      </button>
+      <a class="btn-icone" href="#historico">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6L3.5 8.5M3.5 4v4.5H8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Histórico</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- TELA 1: ROLETA -->
+    <section id="telaRoleta" class="tela tela-roleta" aria-labelledby="tituloRoleta">
+      <div class="col-roda">
+        <h1 id="tituloRoleta" class="titulo">Gire e descubra o seu <span class="destaque">produto absurdo</span>!</h1>
+        <p class="sub">Depois você vai criar no Canva uma apresentação para vendê-lo.</p>
+
+        <div class="roda-wrap">
+          <div class="ponteiro" id="ponteiro" aria-hidden="true">
+            <svg viewBox="0 0 60 70"><path d="M30 68 L6 18 A26 26 0 1 1 54 18 Z" fill="#ffd23f" stroke="#1b1035" stroke-width="4" stroke-linejoin="round"/><circle cx="30" cy="24" r="9" fill="#1b1035"/></svg>
+          </div>
+          <svg id="roda" class="roda" viewBox="-210 -210 420 420" role="img" aria-label="Roleta com produtos absurdos">
+            <defs>
+              <radialGradient id="brilho" cx="50%" cy="50%" r="50%">
+                <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+                <stop offset="100%" stop-color="#fff" stop-opacity=".18"/>
+              </radialGradient>
+            </defs>
+            <circle r="208" fill="#2a1a52"/>
+            <g id="lampadas"></g>
+            <g id="rodaGiro"></g>
+            <circle r="192" fill="url(#brilho)" pointer-events="none"/>
+            <circle r="34" fill="#1b1035" stroke="#ffd23f" stroke-width="6"/>
+            <text class="hub" y="9" text-anchor="middle">?</text>
+          </svg>
+        </div>
+
+        <button type="button" id="btnGirar" class="btn btn-girar">GIRAR!</button>
+
+        <label class="chk">
+          <input type="checkbox" id="chkNaoRepetir">
+          <span class="chk-caixa" aria-hidden="true"></span>
+          <span>Não repetir produtos já sorteados nesta sessão</span>
+        </label>
+      </div>
+
+      <div class="col-resultado">
+        <div id="placeholder" class="cartao placeholder">
+          <div class="ph-emoji" aria-hidden="true">🎰</div>
+          <p><strong>Como funciona:</strong> a roleta sorteia o <b>produto</b>, e as máquinas sorteiam o <b>público-alvo</b> e a <b>reviravolta</b>.</p>
+          <p>Você pode <b>trocar cada parte uma única vez</b>. Depois é só aceitar a missão!</p>
+        </div>
+
+        <article id="resultado" class="cartao resultado" hidden aria-labelledby="tituloResultado">
+          <h2 id="tituloResultado" class="rotulo-cartao">Seu sorteio</h2>
+
+          <div class="parte parte-produto">
+            <span class="etiqueta e-produto">Produto absurdo</span>
+            <p id="valProduto" class="val-produto"></p>
+            <button type="button" class="btn-trocar" data-parte="produto">Trocar</button>
+          </div>
+
+          <div class="parte">
+            <span class="etiqueta e-publico">Público-alvo</span>
+            <div class="slot"><p id="valPublico" class="slot-txt"></p></div>
+            <button type="button" class="btn-trocar" data-parte="publico">Trocar</button>
+          </div>
+
+          <div class="parte">
+            <span class="etiqueta e-reviravolta">Reviravolta</span>
+            <div class="slot"><p id="valReviravolta" class="slot-txt"></p></div>
+            <button type="button" class="btn-trocar" data-parte="reviravolta">Trocar</button>
+          </div>
+
+          <p class="dica">Cada parte pode ser trocada <b>uma vez</b>.</p>
+          <button type="button" id="btnAceitar" class="btn btn-aceitar">Aceitar missão ✓</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- TELA 2: MISSÃO -->
+    <section id="telaMissao" class="tela tela-missao" hidden aria-labelledby="tituloMissao">
+      <div class="missao-topo">
+        <h1 id="tituloMissao" class="titulo" tabindex="-1">Sua <span class="destaque">missão</span></h1>
+        <p class="sub">Crie no Canva uma apresentação de <b>6 slides</b> vendendo o seu produto.</p>
+      </div>
+
+      <div class="missao-sorteio cartao">
+        <div><span class="etiqueta e-produto">Produto</span><p id="mProduto" class="m-produto"></p></div>
+        <div><span class="etiqueta e-publico">Público-alvo</span><p id="mPublico"></p></div>
+        <div><span class="etiqueta e-reviravolta">Reviravolta</span><p id="mReviravolta"></p></div>
+      </div>
+
+      <div class="missao-grade">
+        <div class="cartao">
+          <h2 class="h-cartao">🎞️ Os 6 slides</h2>
+          <ol class="slides">
+            <li><b>Capa:</b> nome do produto + logo</li>
+            <li><b>O problema</b> que ele resolve</li>
+            <li><b>Como funciona</b></li>
+            <li><b>Para quem é</b> (o público sorteado)</li>
+            <li><b>A reviravolta</b> e como o produto lida com ela</li>
+            <li><b>Preço, slogan</b> e um anúncio final</li>
+          </ol>
+        </div>
+
+        <div class="cartao regras">
+          <h2 class="h-cartao">🤖 Regras da IA</h2>
+          <ul>
+            <li>Você <b>DEVE</b> usar a IA do Canva para gerar pelo menos as <b>imagens</b>.</li>
+            <li>Você pode usar no <b>MÁXIMO 5 prompts</b> de IA no total. Escolha bem.</li>
+            <li><b>Nome do produto, slogan e preço</b> precisam ser criados por <b>VOCÊ</b>, sem IA.</li>
+            <li>Mude <b>pelo menos 3 coisas</b> no que a IA gerar (cor, texto, posição, fonte...).</li>
+          </ul>
+        </div>
+
+        <div class="cartao ferramenta">
+          <h2 class="h-cartao" id="hPrompts">Prompts usados</h2>
+          <div class="contador" role="group" aria-labelledby="hPrompts">
+            <button type="button" class="btn-redondo" id="btnMenos" aria-label="Diminuir prompts usados">−</button>
+            <output id="numPrompts" aria-live="polite">0 / 5</output>
+            <button type="button" class="btn-redondo" id="btnMais" aria-label="Aumentar prompts usados">+</button>
+          </div>
+          <div class="bolinhas" id="bolinhas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="aviso-prompts" id="avisoPrompts"></p>
+        </div>
+
+        <div class="cartao ferramenta">
+          <h2 class="h-cartao">⏱️ Cronômetro <small>(opcional)</small></h2>
+          <div class="relogio" id="relogio" role="timer" aria-live="off">40:00</div>
+          <div class="barra"><span id="barraTempo"></span></div>
+          <div class="linha-btns">
+            <button type="button" class="btn btn-peq" id="btnTempo">Iniciar</button>
+            <button type="button" class="btn btn-peq btn-sec" id="btnZerar">Reiniciar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cartao ideias">
+        <div class="linha-btns">
+          <button type="button" class="btn btn-ideias" id="btnIdeias">💡 Gerar ideias de prompt</button>
+          <button type="button" class="btn btn-sec" id="btnCopiar">📋 Copiar minha missão</button>
+        </div>
+        <div id="listaIdeias" class="lista-ideias" aria-live="polite"></div>
+      </div>
+
+      <div class="linha-btns centro">
+        <button type="button" class="btn btn-sec" id="btnVoltar">← Voltar para a roleta</button>
+      </div>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section id="historico" class="historico cartao" aria-labelledby="tituloHist">
+      <div class="hist-topo">
+        <h2 id="tituloHist" class="h-cartao">🕘 Últimos sorteios</h2>
+        <button type="button" class="btn btn-peq btn-sec" id="btnLimpar">Limpar histórico</button>
+      </div>
+      <ol id="listaHist" class="lista-hist"></ol>
+      <p id="histVazio" class="hist-vazio">Nenhum sorteio ainda. Gire a roleta!</p>
+    </section>
+  </main>
+
+  <footer class="rodape">UNIPAMPA Cidadã · Módulo III · Inteligência Artificial</footer>
+
+  <canvas id="confete" aria-hidden="true"></canvas>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="anuncio" class="sr-only" aria-live="assertive"></div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
