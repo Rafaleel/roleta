@@ -547,7 +547,7 @@
   const PALETAS = ["tons pastel de rosa e azul-bebê", "roxo e amarelo vibrantes", "verde-água e coral", "laranja, vermelho e creme", "azul-marinho com detalhes dourados", "cores neon sobre fundo escuro", "preto e branco com um único detalhe vermelho"];
   const ENQUADRAMENTOS = ["close-up centralizado", "plano aberto mostrando o ambiente", "vista de cima (plano zenital)", "ângulo de baixo para cima, deixando o produto heroico", "plano médio com o produto em primeiro plano", "vista em três quartos (diagonal)"];
   const LUZES = ["luz suave de janela", "luz dramática de palco", "luz de pôr do sol", "iluminação de estúdio com fundo liso", "brilho mágico ao redor"];
-  const CENARIOS = ["uma sala de aula", "uma cozinha aconchegante", "o pampa gaúcho ao entardecer", "uma vitrine de loja", "o espaço sideral", "um quarto bagunçado", "uma praça da cidade"];
+  const CENARIOS = ["numa sala de aula", "numa cozinha aconchegante", "no pampa gaúcho ao entardecer", "numa vitrine de loja", "no espaço sideral", "num quarto bagunçado", "numa praça da cidade"];
 
   function gerarIdeias() {
     const prod = estado.produto.charAt(0).toLowerCase() + estado.produto.slice(1);
@@ -557,8 +557,8 @@
     const [q1, q2, q3] = embaralhar(ENQUADRAMENTOS);
     return [
       { tipo: "Imagem do produto (capa)", txt: `${e1} de ${prod}, ${q1}, ${sortear(LUZES)}, paleta em ${p1}, fundo simples, sem texto na imagem.` },
-      { tipo: "Cena de uso (público)", txt: `${e2} mostrando ${quem} usando ${prod} em ${sortear(CENARIOS)}, expressões alegres, ${q2}, cores em ${p2}.` },
-      { tipo: "Cena da reviravolta", txt: `${e3} de ${prod} numa situação em que ele ${estado.reviravolta}, clima divertido e exagerado, ${q3}, ${sortear(LUZES)}, paleta em ${p3}.` }
+      { tipo: "Cena de uso (público)", txt: `${e2} mostrando ${quem} usando ${prod} ${sortear(CENARIOS)}, expressões alegres, ${q2}, cores em ${p2}.` },
+      { tipo: "Cena da reviravolta", txt: `${e3} de ${prod} numa situação em que o produto ${estado.reviravolta}, clima divertido e exagerado, ${q3}, ${sortear(LUZES)}, paleta em ${p3}.` }
     ].map((i) => ({ ...i, txt: i.txt.charAt(0).toUpperCase() + i.txt.slice(1) }));
   }
   $("btnIdeias").addEventListener("click", () => {

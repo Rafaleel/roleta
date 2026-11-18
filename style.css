@@ -195,8 +195,8 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 .h-cartao { font-family: var(--fonte-titulo); font-size: 1.25rem; margin: 0 0 10px; }
 .h-cartao small { font-family: var(--fonte); font-size: .8rem; color: var(--texto-suave); font-weight: 500; }
 .slides { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
-.slides li { counter-increment: s; display: flex; gap: 10px; align-items: baseline; }
-.slides li::before { content: counter(s); flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; background: var(--roxo); font-weight: 700; font-size: .9rem; }
+.slides li { counter-increment: s; position: relative; padding-left: 40px; min-height: 28px; padding-top: 2px; }
+.slides li::before { content: counter(s); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; background: var(--roxo); font-weight: 700; font-size: .9rem; }
 .regras ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
 .regras li::marker { color: var(--coral); }
 .regras b { color: var(--amarelo); }
@@ -269,14 +269,15 @@ body.projetor .topo { max-width: none; padding: 10px 24px; }
 body.projetor main { max-width: none; padding: 0 3vw 10px; }
 body.projetor .historico, body.projetor .rodape, body.projetor .sub, body.projetor .chk, body.projetor .fundo { display: none; }
 body.projetor .tela-roleta { grid-template-columns: auto minmax(0, 1fr); gap: 4vw; align-items: center; min-height: calc(100vh - 90px); }
-body.projetor .titulo { font-size: clamp(2rem, 3.4vw, 4.2rem); }
-body.projetor .roda-wrap { width: min(78vh, 52vw); margin: 34px auto 24px; }
+body.projetor .titulo { font-size: clamp(1.6rem, 2.6vw, 3rem); margin: 0; }
+/* a roda ocupa a altura que sobra depois do topo, título e botão */
+body.projetor .roda-wrap { width: min(calc(100vh - 330px), 50vw); margin: 34px auto 20px; }
 body.projetor .fatia-txt { font-size: 12px; }
 body.projetor .btn-girar { font-size: clamp(2rem, 3vw, 3.6rem); padding: 18px 80px; }
 body.projetor .col-resultado { position: static; margin-top: 0; }
 body.projetor .placeholder { font-size: clamp(1.1rem, 1.6vw, 2rem); }
-body.projetor .val-produto { font-size: clamp(2.2rem, 3.6vw, 4.6rem); }
-body.projetor .slot-txt { font-size: clamp(1.3rem, 2vw, 2.6rem); }
+body.projetor .val-produto { font-size: clamp(2rem, min(3.6vw, 6vh), 4.6rem); }
+body.projetor .slot-txt { font-size: clamp(1.2rem, min(2vw, 3.6vh), 2.6rem); }
 body.projetor .etiqueta { font-size: clamp(.8rem, 1vw, 1.3rem); }
 body.projetor .btn-trocar, body.projetor .dica { font-size: clamp(.9rem, 1.1vw, 1.4rem); }
 body.projetor .btn-aceitar { font-size: clamp(1.2rem, 1.6vw, 2rem); min-height: 72px; }
