@@ -76,7 +76,7 @@ window.DADOS = {
     "Chuveiro que faz show de luzes",
     "Sabonete que nunca escorrega da mão",
     "Xampu que penteia o cabelo sozinho",
-    "Pente com Bluetooth",
+    "Pente que se conecta ao celular",
     "Secador de cabelo que cria penteados de anime",
     "Pijama que desliga o celular na hora de dormir",
     "Cama que arruma a si mesma",
@@ -255,7 +255,7 @@ window.DADOS = {
     "para tartarugas apressadas",
     "para quem odeia segunda-feira",
     "para cientistas distraídos",
-    "para vovôs que querem ser youtubers",
+    "para vovôs que querem ser influenciadores digitais",
     "para unicórnios desempregados",
     "para quem mora em apartamento minúsculo",
     "para atletas de soneca olímpica",
@@ -274,7 +274,7 @@ window.DADOS = {
     "para quem fala sozinho",
     "para detetives particulares",
     "para quem vive no frio de -5 °C da Campanha",
-    "para chefes de cozinha de miojo"
+    "para chefes de cozinha de macarrão instantâneo"
   ],
 
   reviravoltas: [

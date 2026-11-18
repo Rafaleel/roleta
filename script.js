@@ -6,13 +6,14 @@
   const N_FATIAS = Math.min(14, produtos.length); // entre 12 e 16 fatias por giro
   const PASSO = 360 / N_FATIAS;
   const CORES = [
-    ["#8b5cf6", "#fff"], ["#ff6b6b", "#1b1035"], ["#ffd23f", "#1b1035"], ["#2ec4b6", "#1b1035"],
-    ["#f472b6", "#1b1035"], ["#4f6bff", "#fff"], ["#ff9f43", "#1b1035"]
+    ["#7c3aed", "#fff"], ["#ff6b6b", "#1b1035"], ["#ffd23f", "#1b1035"], ["#2ec4b6", "#1b1035"],
+    ["#f472b6", "#1b1035"], ["#3d5af1", "#fff"], ["#ff9f43", "#1b1035"]
   ];
   const MAX_PROMPTS = 5;
   const TEMPO_TOTAL = 40 * 60;
   const CHAVE_HIST = "roleta-absurda:historico";
   const CHAVE_NAOREP = "roleta-absurda:nao-repetir";
+  const CHAVE_SESSAO = "roleta-absurda:ja-sorteados"; // sessionStorage: some ao fechar a aba
 
   const $ = (id) => document.getElementById(id);
   const menosMovimento = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -27,14 +28,14 @@
   };
 
   /* ---------- Armazenamento (pode falhar em aba anônima) ---------- */
-  function ler(chave, padrao) {
+  function ler(chave, padrao, area = "localStorage") {
     try {
-      const v = localStorage.getItem(chave);
+      const v = window[area].getItem(chave);
       return v === null ? padrao : JSON.parse(v);
     } catch (e) { return padrao; }
   }
-  function gravar(chave, valor) {
-    try { localStorage.setItem(chave, JSON.stringify(valor)); } catch (e) { /* sem armazenamento: segue só na memória */ }
+  function gravar(chave, valor, area = "localStorage") {
+    try { window[area].setItem(chave, JSON.stringify(valor)); } catch (e) { /* sem armazenamento: segue só na memória */ }
   }
 
   /* ---------- Som (Web Audio, começa desligado) ---------- */
@@ -287,8 +288,13 @@
   const anunciar = (msg) => { $("anuncio").textContent = msg; };
 
   /* ---------- Histórico ---------- */
+  const valido = (h) => !!h && typeof h === "object" && typeof h.quando === "number" &&
+    ["produto", "publico", "reviravolta"].every((k) => typeof h[k] === "string");
   let historico = ler(CHAVE_HIST, []);
-  if (!Array.isArray(historico)) historico = [];
+  historico = Array.isArray(historico) ? historico.filter(valido) : [];
+  let jaSorteados = ler(CHAVE_SESSAO, [], "sessionStorage");
+  if (!Array.isArray(jaSorteados)) jaSorteados = [];
+  const marcarSorteado = (p) => { jaSorteados.push(p); gravar(CHAVE_SESSAO, jaSorteados, "sessionStorage"); };
   const chkNaoRepetir = $("chkNaoRepetir");
   chkNaoRepetir.checked = ler(CHAVE_NAOREP, false) === true;
   chkNaoRepetir.addEventListener("change", () => gravar(CHAVE_NAOREP, chkNaoRepetir.checked));
@@ -326,6 +332,8 @@
   }
   $("btnLimpar").addEventListener("click", () => {
     historico = [];
+    jaSorteados = [];
+    gravar(CHAVE_SESSAO, jaSorteados, "sessionStorage");
     salvarHistorico();
     avisar("Histórico limpo.");
   });
@@ -339,10 +347,13 @@
   function poolProdutos(excluir) {
     let pool = produtos.filter((p) => p !== excluir);
     if (chkNaoRepetir.checked) {
-      const usados = new Set(historico.map((h) => h.produto));
+      const usados = new Set(jaSorteados);
       const livres = pool.filter((p) => !usados.has(p));
       if (livres.length) pool = livres;
-      else avisar("Todos os produtos já saíram! A lista recomeçou.");
+      else {
+        jaSorteados = [];
+        avisar("Todos os produtos já saíram! A lista recomeçou.");
+      }
     }
     return pool;
   }
@@ -365,10 +376,11 @@
   async function sortearTudo() {
     if (girando) return;
     estado.trocas = {};
-    botoesTrocar.forEach((b) => b.classList.remove("usado"));
+    botoesTrocar.forEach((b) => { b.classList.remove("usado"); b.textContent = "Trocar"; });
     travar(true);
     anunciar("Girando a roleta...");
     estado.produto = sortear(poolProdutos());
+    marcarSorteado(estado.produto);
     estado.publico = sortear(publicos);
     estado.reviravolta = sortear(reviravoltas);
 
@@ -392,7 +404,9 @@
     historico.unshift({ id: estado.id, quando: estado.id, produto: estado.produto, publico: estado.publico, reviravolta: estado.reviravolta, aceito: false });
     salvarHistorico();
     travar(false);
-    anunciar(`Sorteado: ${estado.produto}, ${estado.publico}, que ${estado.reviravolta}.`);
+    // o botão desativado perde o foco; devolve para quem usa teclado
+    if (document.activeElement === document.body) btnGirar.focus({ preventScroll: true });
+    anunciar(`Sorteado:${estado.produto}, ${estado.publico}, que ${estado.reviravolta}.`);
   }
 
   async function trocar(parte) {
@@ -404,6 +418,7 @@
     travar(true);
     if (parte === "produto") {
       estado.produto = sortear(poolProdutos(estado.produto));
+      marcarSorteado(estado.produto);
       await girarRoda(estado.produto);
       confete();
       somVitoria();
@@ -417,7 +432,8 @@
     const h = historico.find((x) => x.id === estado.id);
     if (h) { h[parte] = estado[parte]; salvarHistorico(); }
     travar(false);
-    anunciar(`Nova parte sorteada: ${estado[parte]}.`);
+    if (document.activeElement === document.body || document.activeElement.disabled) $("btnAceitar").focus({ preventScroll: true });
+    anunciar(`Nova parte sorteada:${estado[parte]}.`);
   }
 
   btnGirar.addEventListener("click", sortearTudo);
@@ -425,6 +441,7 @@
 
   /* ---------- Missão ---------- */
   let prompts = 0;
+  let missaoAceita = 0; // id do sorteio da missão aberta: voltar e aceitar de novo não zera o contador
   function mostrarTela(missao) {
     $("telaRoleta").hidden = missao;
     $("telaMissao").hidden = !missao;
@@ -438,9 +455,13 @@
     $("mProduto").textContent = estado.produto;
     $("mPublico").textContent = estado.publico;
     $("mReviravolta").textContent = estado.reviravolta;
-    $("listaIdeias").textContent = "";
-    prompts = 0;
-    atualizarPrompts();
+    if (missaoAceita !== estado.id) {
+      missaoAceita = estado.id;
+      $("listaIdeias").textContent = "";
+      $("btnIdeias").textContent = "💡 Gerar ideias de prompt";
+      prompts = 0;
+      atualizarPrompts();
+    }
     const h = historico.find((x) => x.id === estado.id);
     if (h) { h.aceito = true; salvarHistorico(); }
     mostrarTela(true);
@@ -524,6 +545,7 @@
       await navigator.clipboard.writeText(texto);
       return true;
     } catch (e) {
+      const ativo = document.activeElement;
       const ta = document.createElement("textarea");
       ta.value = texto;
       ta.setAttribute("readonly", "");
@@ -534,6 +556,7 @@
       let ok = false;
       try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
       ta.remove();
+      if (ativo) ativo.focus();
       return ok;
     }
   }
@@ -599,6 +622,10 @@
   $("btnProjetor").addEventListener("click", alternarProjetor);
   document.addEventListener("fullscreenchange", () => {
     if (!document.fullscreenElement && document.body.classList.contains("projetor")) alternarProjetor();
+  });
+  // sem tela cheia (recusada ou indisponível), Esc também sai do modo projetor
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !document.fullscreenElement && document.body.classList.contains("projetor")) alternarProjetor();
   });
 
   /* ---------- Início ---------- */

@@ -21,7 +21,7 @@ Outros recursos:
 
 - **Modo projetor:** tela cheia com letras grandes, para sortear na frente da turma.
 - **Histórico:** mostra os últimos sorteios. Ele fica salvo só neste navegador.
-- **Não repetir produtos:** quando ligado, a roleta não sorteia de novo um produto que já está no histórico.
+- **Não repetir produtos:** quando ligado, a roleta não sorteia de novo um produto que já saiu nesta aba do navegador. A lista recomeça quando você fecha a aba ou clica em "Limpar histórico".
 - **Som:** começa desligado. Ligue no botão do topo. Todos os sons são gerados pelo próprio navegador, sem arquivos de áudio.
 
 ## Arquivos

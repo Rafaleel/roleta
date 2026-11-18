@@ -5,7 +5,7 @@
   --card-borda: rgba(255, 255, 255, .13);
   --texto: #fdfbff;
   --texto-suave: #cfc4ee;
-  --roxo: #8b5cf6;
+  --roxo: #7c3aed;
   --coral: #ff6b6b;
   --amarelo: #ffd23f;
   --turquesa: #2ec4b6;
@@ -124,7 +124,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 .btn-girar:disabled { animation: none; }
 @keyframes respira { 50% { transform: scale(1.04); } }
 .btn-aceitar { width: 100%; font-size: 1.15rem; min-height: 56px; margin-top: 6px; background: linear-gradient(135deg, var(--turquesa), #22a699); color: var(--escuro); box-shadow: 0 6px 0 #17786f; }
-.btn-ideias { background: linear-gradient(135deg, var(--roxo), var(--rosa)); }
+.btn-ideias { background: linear-gradient(135deg, var(--roxo), #c026d3); }
 
 /* Checkbox */
 .chk { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; cursor: pointer; color: var(--texto-suave); font-size: .95rem; text-align: left; }
@@ -276,7 +276,9 @@ body.projetor .fatia-txt { font-size: 12px; }
 body.projetor .btn-girar { font-size: clamp(2rem, 3vw, 3.6rem); padding: 18px 80px; }
 body.projetor .col-resultado { position: static; margin-top: 0; }
 body.projetor .placeholder { font-size: clamp(1.1rem, 1.6vw, 2rem); }
-body.projetor .val-produto { font-size: clamp(2rem, min(3.6vw, 6vh), 4.6rem); }
+body.projetor .val-produto { font-size: clamp(1.8rem, min(3.6vw, 5.2vh), 4.6rem); }
+body.projetor .parte { padding: clamp(6px, 1.3vh, 14px) 0; }
+body.projetor .resultado .dica { margin: 2px 0 6px; }
 body.projetor .slot-txt { font-size: clamp(1.2rem, min(2vw, 3.6vh), 2.6rem); }
 body.projetor .etiqueta { font-size: clamp(.8rem, 1vw, 1.3rem); }
 body.projetor .btn-trocar, body.projetor .dica { font-size: clamp(.9rem, 1.1vw, 1.4rem); }
