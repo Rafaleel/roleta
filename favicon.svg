@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="34" r="29" fill="#1b1035"/>
-  <path d="M32 34 L32 7 A27 27 0 0 1 55.4 20.5 Z" fill="#8b5cf6"/>
-  <path d="M32 34 L55.4 20.5 A27 27 0 0 1 55.4 47.5 Z" fill="#ff6b6b"/>
-  <path d="M32 34 L55.4 47.5 A27 27 0 0 1 32 61 Z" fill="#ffd23f"/>
-  <path d="M32 34 L32 61 A27 27 0 0 1 8.6 47.5 Z" fill="#2ec4b6"/>
-  <path d="M32 34 L8.6 47.5 A27 27 0 0 1 8.6 20.5 Z" fill="#f472b6"/>
-  <path d="M32 34 L8.6 20.5 A27 27 0 0 1 32 7 Z" fill="#4f6bff"/>
-  <circle cx="32" cy="34" r="7" fill="#1b1035" stroke="#ffd23f" stroke-width="2.5"/>
-  <path d="M32 15 L24 2 H40 Z" fill="#ffd23f" stroke="#1b1035" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="32" cy="34" r="29" fill="#1D1D1B"/>
+  <path d="M32 34 L32 7 A27 27 0 0 1 55.4 20.5 Z" fill="#1F5C3F"/>
+  <path d="M32 34 L55.4 20.5 A27 27 0 0 1 55.4 47.5 Z" fill="#FF7A2F"/>
+  <path d="M32 34 L55.4 47.5 A27 27 0 0 1 32 61 Z" fill="#F2C14E"/>
+  <path d="M32 34 L32 61 A27 27 0 0 1 8.6 47.5 Z" fill="#A8432E"/>
+  <path d="M32 34 L8.6 47.5 A27 27 0 0 1 8.6 20.5 Z" fill="#F6EFE1"/>
+  <path d="M32 34 L8.6 20.5 A27 27 0 0 1 32 7 Z" fill="#1F6F78"/>
+  <circle cx="32" cy="34" r="7" fill="#1D1D1B" stroke="#F2C14E" stroke-width="2.5"/>
+  <path d="M32 15 L24 2 H40 Z" fill="#FF7A2F" stroke="#1D1D1B" stroke-width="2" stroke-linejoin="round"/>
 </svg>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Roleta do Produto Absurdo</title>
   <meta name="description" content="Gire a roleta, sorteie um produto absurdo e crie no Canva uma apresentação para vendê-lo. UNIPAMPA Cidadã · Módulo III.">
-  <meta name="theme-color" content="#1b1035">
+  <meta name="theme-color" content="#F6EFE1">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,18 +31,18 @@
   </svg>
 
   <div class="fundo" aria-hidden="true">
-    <svg class="forma" style="--x:6%;--y:12%;--t:46px;--c:var(--amarelo);--d:26s"><use href="#f-estrela"/></svg>
-    <svg class="forma" style="--x:88%;--y:8%;--t:52px;--c:var(--turquesa);--d:34s"><use href="#f-anel"/></svg>
-    <svg class="forma" style="--x:72%;--y:30%;--t:30px;--c:var(--coral);--d:22s"><use href="#f-mais"/></svg>
-    <svg class="forma" style="--x:14%;--y:46%;--t:40px;--c:var(--rosa);--d:30s"><use href="#f-triangulo"/></svg>
-    <svg class="forma" style="--x:92%;--y:58%;--t:70px;--c:var(--amarelo);--d:38s"><use href="#f-zigue"/></svg>
-    <svg class="forma" style="--x:4%;--y:78%;--t:58px;--c:var(--turquesa);--d:28s"><use href="#f-quadrado"/></svg>
-    <svg class="forma" style="--x:50%;--y:4%;--t:24px;--c:var(--rosa);--d:20s"><use href="#f-estrela"/></svg>
-    <svg class="forma" style="--x:40%;--y:88%;--t:36px;--c:var(--coral);--d:32s"><use href="#f-anel"/></svg>
-    <svg class="forma" style="--x:80%;--y:86%;--t:28px;--c:var(--turquesa);--d:24s"><use href="#f-estrela"/></svg>
-    <svg class="forma" style="--x:30%;--y:24%;--t:22px;--c:var(--amarelo);--d:27s"><use href="#f-mais"/></svg>
-    <svg class="forma" style="--x:60%;--y:62%;--t:34px;--c:var(--roxo-claro);--d:36s"><use href="#f-triangulo"/></svg>
-    <svg class="forma" style="--x:22%;--y:68%;--t:20px;--c:var(--amarelo);--d:21s"><use href="#f-estrela"/></svg>
+    <svg class="forma" style="--x:6%;--y:12%;--t:46px;--c:var(--mostarda);--d:26s"><use href="#f-estrela"/></svg>
+    <svg class="forma" style="--x:88%;--y:8%;--t:52px;--c:var(--petroleo);--d:34s"><use href="#f-anel"/></svg>
+    <svg class="forma" style="--x:72%;--y:30%;--t:30px;--c:var(--laranja);--d:22s"><use href="#f-mais"/></svg>
+    <svg class="forma" style="--x:14%;--y:46%;--t:40px;--c:var(--terracota);--d:30s"><use href="#f-triangulo"/></svg>
+    <svg class="forma" style="--x:92%;--y:58%;--t:70px;--c:var(--mostarda);--d:38s"><use href="#f-zigue"/></svg>
+    <svg class="forma" style="--x:4%;--y:78%;--t:58px;--c:var(--petroleo);--d:28s"><use href="#f-quadrado"/></svg>
+    <svg class="forma" style="--x:50%;--y:4%;--t:24px;--c:var(--terracota);--d:20s"><use href="#f-estrela"/></svg>
+    <svg class="forma" style="--x:40%;--y:88%;--t:36px;--c:var(--laranja);--d:32s"><use href="#f-anel"/></svg>
+    <svg class="forma" style="--x:80%;--y:86%;--t:28px;--c:var(--petroleo);--d:24s"><use href="#f-estrela"/></svg>
+    <svg class="forma" style="--x:30%;--y:24%;--t:22px;--c:var(--mostarda);--d:27s"><use href="#f-mais"/></svg>
+    <svg class="forma" style="--x:60%;--y:62%;--t:34px;--c:var(--erva);--d:36s"><use href="#f-triangulo"/></svg>
+    <svg class="forma" style="--x:22%;--y:68%;--t:20px;--c:var(--mostarda);--d:21s"><use href="#f-estrela"/></svg>
   </div>
 
   <header class="topo">
@@ -75,7 +75,7 @@
 
         <div class="roda-wrap">
           <div class="ponteiro" id="ponteiro" aria-hidden="true">
-            <svg viewBox="0 0 60 70"><path d="M30 68 L6 18 A26 26 0 1 1 54 18 Z" fill="#ffd23f" stroke="#1b1035" stroke-width="4" stroke-linejoin="round"/><circle cx="30" cy="24" r="9" fill="#1b1035"/></svg>
+            <svg viewBox="0 0 60 70"><path d="M30 68 L6 18 A26 26 0 1 1 54 18 Z" fill="#FF7A2F" stroke="#1D1D1B" stroke-width="4" stroke-linejoin="round"/><circle cx="30" cy="24" r="9" fill="#1D1D1B"/></svg>
           </div>
           <svg id="roda" class="roda" viewBox="-210 -210 420 420" role="img" aria-label="Roleta com produtos absurdos">
             <defs>
@@ -84,11 +84,11 @@
                 <stop offset="100%" stop-color="#fff" stop-opacity=".18"/>
               </radialGradient>
             </defs>
-            <circle r="208" fill="#2a1a52"/>
+            <circle r="208" fill="#1D1D1B"/>
             <g id="lampadas"></g>
             <g id="rodaGiro"></g>
             <circle r="192" fill="url(#brilho)" pointer-events="none"/>
-            <circle r="34" fill="#1b1035" stroke="#ffd23f" stroke-width="6"/>
+            <circle r="34" fill="#1D1D1B" stroke="#F2C14E" stroke-width="6"/>
             <text class="hub" y="9" text-anchor="middle">?</text>
           </svg>
         </div>

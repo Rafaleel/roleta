@@ -5,8 +5,8 @@
   const N_FATIAS = Math.min(14, produtos.length); // entre 12 e 16 fatias por giro
   const PASSO = 360 / N_FATIAS;
   const CORES = [
-    ["#7c3aed", "#fff"], ["#ff6b6b", "#1b1035"], ["#ffd23f", "#1b1035"], ["#2ec4b6", "#1b1035"],
-    ["#f472b6", "#1b1035"], ["#3d5af1", "#fff"], ["#ff9f43", "#1b1035"]
+    ["#1F5C3F", "#fff"], ["#FF7A2F", "#1D1D1B"], ["#F2C14E", "#1D1D1B"], ["#A8432E", "#fff"],
+    ["#F6EFE1", "#1D1D1B"], ["#1F6F78", "#fff"], ["#6A994E", "#1D1D1B"]
   ];
   const MAX_PROMPTS = 5;
   const TEMPO_TOTAL = 40 * 60;
@@ -121,7 +121,7 @@
       const path = document.createElementNS(NS, "path");
       path.setAttribute("d", `M0 0 L${x0} ${y0} A192 192 0 0 1 ${x1} ${y1} Z`);
       path.setAttribute("fill", cor);
-      path.setAttribute("stroke", "#1b1035");
+      path.setAttribute("stroke", "#1D1D1B");
       path.setAttribute("stroke-width", "2");
       rodaGiro.appendChild(path);
 
@@ -223,7 +223,7 @@
   function confete() {
     if (menosMovimento()) return;
     prepararCanvas();
-    const cores = ["#8b5cf6", "#ff6b6b", "#ffd23f", "#2ec4b6", "#f472b6", "#ffffff"];
+    const cores = ["#1F5C3F", "#FF7A2F", "#F2C14E", "#A8432E", "#1F6F78", "#6A994E", "#1D1D1B"];
     const qtd = innerWidth < 600 ? 120 : 220;
     for (let i = 0; i < qtd; i++) {
       const lado = i % 2 ? 1 : -1;

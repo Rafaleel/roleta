@@ -32,6 +32,10 @@ window.DADOS = {
     "Televisão que só passa propaganda",
     "Cuia com furo no fundo",
     "Bomba de chimarrão entupida",
-    "Garrafa térmica que esfria a água"
+    "Garrafa térmica que esfria a água",
+    "Sorvete de temperatura ambiente",
+    "Gelo em pó",
+    "Cuia descartável de papel",
+    "Espeto de churrasco de plástico"
   ]
 };
