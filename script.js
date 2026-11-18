@@ -461,7 +461,7 @@
     if (missaoAceita !== estado.id) {
       missaoAceita = estado.id;
       $("listaIdeias").textContent = "";
-      $("btnIdeias").textContent = "💡 Gerar ideias de prompt";
+      $("txtIdeias").textContent = "Gerar ideias de prompt";
       prompts = 0;
       atualizarPrompts();
     }
@@ -604,7 +604,7 @@
     nota.className = "nota-ideias";
     nota.textContent = "São só inspirações: mude o estilo, as cores e o enquadramento do seu jeito. Clique de novo para outras ideias.";
     box.appendChild(nota);
-    $("btnIdeias").textContent = "💡 Outras ideias de prompt";
+    $("txtIdeias").textContent = "Outras ideias de prompt";
   });
 
   /* ---------- Modo projetor ---------- */

@@ -13,7 +13,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="fundo" aria-hidden="true"><span></span><span></span><span></span></div>
+  <!-- Ícones e formas reutilizáveis -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cronometro" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10 2.5h4M12 2.5V6M12 13.5l3-3M18.5 6.5l1.5-1.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-slides" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 16v4M8 20h8M7 12l3-3 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 8V4.5M2 13v2M22 13v2M9.5 16h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="3.5" r="1.4" fill="currentColor"/><circle cx="9" cy="12.5" r="1.5" fill="currentColor"/><circle cx="15" cy="12.5" r="1.5" fill="currentColor"/></symbol>
+    <symbol id="i-balao" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 6.5l.9 2 2 .9-2 .9-.9 2-.9-2-2-.9 2-.9z" fill="currentColor"/></symbol>
+    <symbol id="i-lampada" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copiar" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 8V5.5A2.5 2.5 0 0 0 13.5 3h-7A2.5 2.5 0 0 0 4 5.5v9A2.5 2.5 0 0 0 6.5 17H8" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+    <symbol id="f-estrela" viewBox="0 0 40 40"><path d="M20 0c1.6 11 7.4 17.4 20 20-12.6 2.6-18.4 9-20 20-1.6-11-7.4-17.4-20-20C12.6 17.4 18.4 11 20 0z" fill="currentColor"/></symbol>
+    <symbol id="f-anel" viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="5"/></symbol>
+    <symbol id="f-triangulo" viewBox="0 0 40 40"><path d="M20 5l16 28H4z" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/></symbol>
+    <symbol id="f-mais" viewBox="0 0 40 40"><path d="M20 5v30M5 20h30" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></symbol>
+    <symbol id="f-zigue" viewBox="0 0 60 24"><path d="M3 18l9-12 9 12 9-12 9 12 9-12 9 12" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="f-quadrado" viewBox="0 0 40 40"><rect x="7" y="7" width="26" height="26" rx="6" fill="none" stroke="currentColor" stroke-width="4.5"/></symbol>
+  </svg>
+
+  <div class="fundo" aria-hidden="true">
+    <svg class="forma" style="--x:6%;--y:12%;--t:46px;--c:var(--amarelo);--d:26s"><use href="#f-estrela"/></svg>
+    <svg class="forma" style="--x:88%;--y:8%;--t:52px;--c:var(--turquesa);--d:34s"><use href="#f-anel"/></svg>
+    <svg class="forma" style="--x:72%;--y:30%;--t:30px;--c:var(--coral);--d:22s"><use href="#f-mais"/></svg>
+    <svg class="forma" style="--x:14%;--y:46%;--t:40px;--c:var(--rosa);--d:30s"><use href="#f-triangulo"/></svg>
+    <svg class="forma" style="--x:92%;--y:58%;--t:70px;--c:var(--amarelo);--d:38s"><use href="#f-zigue"/></svg>
+    <svg class="forma" style="--x:4%;--y:78%;--t:58px;--c:var(--turquesa);--d:28s"><use href="#f-quadrado"/></svg>
+    <svg class="forma" style="--x:50%;--y:4%;--t:24px;--c:var(--rosa);--d:20s"><use href="#f-estrela"/></svg>
+    <svg class="forma" style="--x:40%;--y:88%;--t:36px;--c:var(--coral);--d:32s"><use href="#f-anel"/></svg>
+    <svg class="forma" style="--x:80%;--y:86%;--t:28px;--c:var(--turquesa);--d:24s"><use href="#f-estrela"/></svg>
+    <svg class="forma" style="--x:30%;--y:24%;--t:22px;--c:var(--amarelo);--d:27s"><use href="#f-mais"/></svg>
+    <svg class="forma" style="--x:60%;--y:62%;--t:34px;--c:var(--roxo-claro);--d:36s"><use href="#f-triangulo"/></svg>
+    <svg class="forma" style="--x:22%;--y:68%;--t:20px;--c:var(--amarelo);--d:21s"><use href="#f-estrela"/></svg>
+  </div>
 
   <header class="topo">
     <a class="marca" href="./" aria-label="Roleta do Produto Absurdo, página inicial">
@@ -74,7 +104,7 @@
 
       <div class="col-resultado">
         <div id="placeholder" class="cartao placeholder">
-          <div class="ph-emoji" aria-hidden="true">🎰</div>
+          <img class="ph-icone" src="favicon.svg" alt="" width="72" height="72">
           <p><strong>Como funciona:</strong> a roleta sorteia o <b>produto</b>, e as máquinas sorteiam o <b>público-alvo</b> e a <b>reviravolta</b>.</p>
           <p>Você pode <b>trocar cada parte uma única vez</b>. Depois é só aceitar a missão!</p>
         </div>
@@ -121,7 +151,7 @@
 
       <div class="missao-grade">
         <div class="cartao">
-          <h2 class="h-cartao">🎞️ Os 6 slides</h2>
+          <h2 class="h-cartao"><svg class="ico" aria-hidden="true"><use href="#i-slides"/></svg>Os 6 slides</h2>
           <ol class="slides">
             <li><b>Capa:</b> nome do produto + logo</li>
             <li><b>O problema</b> que ele resolve</li>
@@ -133,7 +163,7 @@
         </div>
 
         <div class="cartao regras">
-          <h2 class="h-cartao">🤖 Regras da IA</h2>
+          <h2 class="h-cartao"><svg class="ico" aria-hidden="true"><use href="#i-robo"/></svg>Regras da IA</h2>
           <ul>
             <li>Você <b>DEVE</b> usar a IA do Canva para gerar pelo menos as <b>imagens</b>.</li>
             <li>Você pode usar no <b>MÁXIMO 5 prompts</b> de IA no total. Escolha bem.</li>
@@ -143,7 +173,7 @@
         </div>
 
         <div class="cartao ferramenta">
-          <h2 class="h-cartao" id="hPrompts">Prompts usados</h2>
+          <h2 class="h-cartao" id="hPrompts"><svg class="ico" aria-hidden="true"><use href="#i-balao"/></svg>Prompts usados</h2>
           <div class="contador" role="group" aria-labelledby="hPrompts">
             <button type="button" class="btn-redondo" id="btnMenos" aria-label="Diminuir prompts usados">−</button>
             <output id="numPrompts" aria-live="polite">0 / 5</output>
@@ -154,7 +184,7 @@
         </div>
 
         <div class="cartao ferramenta">
-          <h2 class="h-cartao">⏱️ Cronômetro <small>(opcional)</small></h2>
+          <h2 class="h-cartao"><svg class="ico" aria-hidden="true"><use href="#i-cronometro"/></svg>Cronômetro <small>(opcional)</small></h2>
           <div class="relogio" id="relogio" role="timer" aria-live="off">40:00</div>
           <div class="barra"><span id="barraTempo"></span></div>
           <div class="linha-btns">
@@ -166,8 +196,8 @@
 
       <div class="cartao ideias">
         <div class="linha-btns">
-          <button type="button" class="btn btn-ideias" id="btnIdeias">💡 Gerar ideias de prompt</button>
-          <button type="button" class="btn btn-sec" id="btnCopiar">📋 Copiar minha missão</button>
+          <button type="button" class="btn btn-ideias" id="btnIdeias"><svg class="ico" aria-hidden="true"><use href="#i-lampada"/></svg><span id="txtIdeias">Gerar ideias de prompt</span></button>
+          <button type="button" class="btn btn-sec" id="btnCopiar"><svg class="ico" aria-hidden="true"><use href="#i-copiar"/></svg>Copiar minha missão</button>
         </div>
         <div id="listaIdeias" class="lista-ideias" aria-live="polite"></div>
       </div>
@@ -180,7 +210,7 @@
     <!-- HISTÓRICO -->
     <section id="historico" class="historico cartao" aria-labelledby="tituloHist">
       <div class="hist-topo">
-        <h2 id="tituloHist" class="h-cartao">🕘 Últimos sorteios</h2>
+        <h2 id="tituloHist" class="h-cartao"><svg class="ico" aria-hidden="true"><use href="#i-relogio"/></svg>Últimos sorteios</h2>
         <button type="button" class="btn btn-peq btn-sec" id="btnLimpar">Limpar histórico</button>
       </div>
       <ol id="listaHist" class="lista-hist"></ol>

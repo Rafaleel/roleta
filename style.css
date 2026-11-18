@@ -10,6 +10,7 @@
   --amarelo: #ffd23f;
   --turquesa: #2ec4b6;
   --rosa: #f472b6;
+  --roxo-claro: #a78bfa;
   --escuro: #1b1035;
   --raio: 22px;
   --sombra: 0 18px 50px -18px rgba(0, 0, 0, .6);
@@ -24,9 +25,7 @@ body {
   min-height: 100vh;
   font-family: var(--fonte);
   color: var(--texto);
-  background: radial-gradient(1200px 700px at 10% -10%, #3b1f7a 0%, transparent 60%),
-              radial-gradient(900px 600px at 110% 20%, #5a1f5e 0%, transparent 55%),
-              var(--bg);
+  background: var(--bg);
   line-height: 1.5;
   overflow-x: hidden;
 }
@@ -34,13 +33,33 @@ body {
 button { font: inherit; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Bolhas de fundo */
-.fundo { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.fundo span { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .35; animation: flutua 18s ease-in-out infinite alternate; }
-.fundo span:nth-child(1) { width: 320px; height: 320px; background: var(--coral); left: -80px; top: 55%; }
-.fundo span:nth-child(2) { width: 260px; height: 260px; background: var(--turquesa); right: -60px; top: 8%; animation-delay: -6s; }
-.fundo span:nth-child(3) { width: 220px; height: 220px; background: var(--amarelo); left: 45%; bottom: -120px; opacity: .2; animation-delay: -12s; }
-@keyframes flutua { to { transform: translate(40px, -60px) scale(1.15); } }
+/* Fundo: gradiente + grade de pontos + órbitas + formas flutuando */
+.fundo {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  background: linear-gradient(160deg, #2d1766 0%, #1b1035 38%, #170d2f 62%, #3a1450 100%);
+}
+.fundo::before { /* grade de pontinhos */
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, .13) 1.3px, transparent 1.6px);
+  background-size: 26px 26px;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 55%, #000 100%);
+          mask-image: linear-gradient(180deg, #000 0%, transparent 55%, #000 100%);
+}
+.fundo::after { /* órbitas finas nos cantos */
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-radial-gradient(circle at 100% 0%, transparent 0 46px, rgba(255, 255, 255, .05) 46px 48px) top right / 420px 420px no-repeat,
+    repeating-radial-gradient(circle at 0% 100%, transparent 0 46px, rgba(255, 255, 255, .05) 46px 48px) bottom left / 420px 420px no-repeat;
+}
+.forma {
+  position: absolute; left: var(--x); top: var(--y); width: var(--t); height: var(--t);
+  color: var(--c); opacity: .3; animation: deriva var(--d) ease-in-out infinite alternate;
+}
+@keyframes deriva {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(18px, -26px) rotate(120deg); }
+  100% { transform: translate(-14px, 12px) rotate(240deg); }
+}
 
 /* Topo */
 .topo {
@@ -116,10 +135,10 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
   font-family: var(--fonte-titulo); font-size: clamp(1.6rem, 6vw, 2.2rem); letter-spacing: .04em;
   padding: 14px 54px; min-height: 68px; border-radius: 999px; color: var(--escuro);
   background: linear-gradient(180deg, #ffe27a, var(--amarelo) 50%, #ffb800);
-  box-shadow: 0 8px 0 #c58a00, 0 18px 40px -10px rgba(255, 210, 63, .6);
+  box-shadow: 0 8px 0 #c58a00, 0 14px 18px -8px rgba(0, 0, 0, .45);
   animation: respira 2.4s ease-in-out infinite;
 }
-.btn-girar:hover:not(:disabled) { box-shadow: 0 11px 0 #c58a00, 0 22px 44px -10px rgba(255, 210, 63, .7); }
+.btn-girar:hover:not(:disabled) { box-shadow: 0 11px 0 #c58a00, 0 17px 20px -8px rgba(0, 0, 0, .45); }
 .btn-girar:active:not(:disabled) { box-shadow: 0 2px 0 #c58a00; }
 .btn-girar:disabled { animation: none; }
 @keyframes respira { 50% { transform: scale(1.04); } }
@@ -142,7 +161,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 }
 .placeholder { text-align: center; color: var(--texto-suave); }
 .placeholder b, .placeholder strong { color: var(--texto); }
-.ph-emoji { font-size: 3rem; animation: balanca 3s ease-in-out infinite; }
+.ph-icone { display: block; margin: 0 auto 6px; animation: balanca 3s ease-in-out infinite; }
 @keyframes balanca { 50% { transform: rotate(-8deg) scale(1.08); } }
 
 .resultado { animation: entra .6s cubic-bezier(.2, 1.4, .4, 1) both; }
@@ -192,7 +211,10 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 .missao-grade > .cartao:nth-child(2) { animation-delay: .08s; }
 .missao-grade > .cartao:nth-child(3) { animation-delay: .16s; }
 .missao-grade > .cartao:nth-child(4) { animation-delay: .24s; }
-.h-cartao { font-family: var(--fonte-titulo); font-size: 1.25rem; margin: 0 0 10px; }
+.h-cartao { display: flex; align-items: center; gap: 8px; font-family: var(--fonte-titulo); font-size: 1.25rem; margin: 0 0 10px; }
+.ferramenta .h-cartao { justify-content: center; }
+.ico { width: 1.25em; height: 1.25em; flex: none; }
+.h-cartao .ico { color: var(--amarelo); }
 .h-cartao small { font-family: var(--fonte); font-size: .8rem; color: var(--texto-suave); font-weight: 500; }
 .slides { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
 .slides li { counter-increment: s; position: relative; padding-left: 40px; min-height: 28px; padding-top: 2px; }
@@ -267,7 +289,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 body.projetor .topo .marca span, body.projetor .acoes-topo a, body.projetor #btnSom span { display: none; }
 body.projetor .topo { max-width: none; padding: 10px 24px; }
 body.projetor main { max-width: none; padding: 0 3vw 10px; }
-body.projetor .historico, body.projetor .rodape, body.projetor .sub, body.projetor .chk, body.projetor .fundo { display: none; }
+body.projetor .historico, body.projetor .rodape, body.projetor .sub, body.projetor .chk { display: none; }
 body.projetor .tela-roleta { grid-template-columns: auto minmax(0, 1fr); gap: 4vw; align-items: center; min-height: calc(100vh - 90px); }
 body.projetor .titulo { font-size: clamp(1.6rem, 2.6vw, 3rem); margin: 0; }
 /* a roda ocupa a altura que sobra depois do topo, título e botão */
@@ -292,5 +314,5 @@ body.projetor .cartao { padding: clamp(20px, 2vw, 40px); }
 /* Menos movimento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-  .lampada { animation: none; }
+  .lampada, .forma { animation: none; }
 }
