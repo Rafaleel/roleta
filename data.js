@@ -446,7 +446,7 @@ window.DADOS = {
         "para jogadores de futebol de várzea",
         "para atletas de soneca olímpica",
         "para professores de Educação Física",
-        "para avós que querem ser campeãs de skate",
+        "para avós que querem ser campeãs de corrida",
         "para times que nunca ganharam nada",
         "para juízes de futebol que ninguém respeita",
         "para centopeias que querem ser atletas",
@@ -476,8 +476,8 @@ window.DADOS = {
         "Trampolim de bolso",
         "Tabuleiro de xadrez em que as peças discutem",
         "Capa de esconde-esconde que só esconde metade do corpo",
-        "Boneco que arruma o próprio quarto",
-        "Jogo da memória que esquece onde estão as cartas"
+        "Boneco que fica com ciúme quando você brinca com outro",
+        "Jogo de tabuleiro que muda as regras no meio da partida"
       ],
       publicos: [
         "para crianças de 5 anos muito exigentes",
@@ -487,15 +487,15 @@ window.DADOS = {
         "para irmãos que brigam pelo mesmo brinquedo",
         "para gatos que derrubam tudo da mesa",
         "para crianças que nunca guardam os brinquedos",
-        "para campeões de xadrez muito nervosos"
+        "para quem não sabe perder"
       ],
       reviravoltas: [
         "só funciona no Dia das Crianças",
         "é totalmente feito de papelão",
-        "vem em 47 peças para montar",
+        "só funciona em cima da mesa da cozinha",
         "precisa de dois usuários ao mesmo tempo",
         "dura apenas 1 minuto",
-        "tem que caber no bolso",
+        "só funciona descalço",
         "brilha no escuro (e não desliga)",
         "só funciona quando ninguém está olhando"
       ]
@@ -657,14 +657,14 @@ window.DADOS = {
       ],
       publicos: [
         "para músicos de banda de garagem",
-        "para aniversariantes de 100 anos",
+        "para festeiros que nunca querem ir embora",
         "para quem canta no chuveiro",
         "para aniversariantes que odeiam surpresa",
         "para DJs de festa de família",
         "para vizinhos que reclamam do barulho",
         "para quem dança mal, mas dança mesmo assim",
         "para avós que organizam as festas da família",
-        "para fantasmas tímidos"
+        "para fantasmas que querem ser cantores"
       ],
       reviravoltas: [
         "só funciona com música de ninar tocando",
