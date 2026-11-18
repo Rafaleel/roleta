@@ -52,7 +52,7 @@ Cuidados:
 
 - Mantenha as **aspas** e a **vírgula** no fim de cada linha. O último item pode ficar sem vírgula.
 - Prefira produtos **difíceis de defender**: inúteis, que atrapalham ou que fazem o contrário do esperado.
-- A lista precisa ter pelo menos 150 produtos, sem repetidos.
+- A lista precisa ter pelo menos 14 produtos (para encher a roleta), sem repetidos.
 
 Depois de salvar no GitHub, o site se atualiza sozinho em 1 ou 2 minutos.
 
