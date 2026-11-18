@@ -1,15 +1,7 @@
 (() => {
   "use strict";
 
-  // O produto define o tema; público e reviravolta saem só do tema dele.
-  const { temas } = window.DADOS;
-  const produtos = temas.flatMap((t) => t.produtos);
-  const temaDe = new Map();
-  temas.forEach((t) => t.produtos.forEach((p) => {
-    console.assert(!temaDe.has(p), "produto em dois temas: " + p);
-    temaDe.set(p, t);
-  }));
-  const LISTA_DA_PARTE = { publico: "publicos", reviravolta: "reviravoltas" };
+  const { produtos } = window.DADOS;
   const N_FATIAS = Math.min(14, produtos.length); // entre 12 e 16 fatias por giro
   const PASSO = 360 / N_FATIAS;
   const CORES = [
@@ -213,37 +205,6 @@
     });
   }
 
-  /* ---------- Caça-níquel ---------- */
-  function girarSlot(elTxt, lista, final) {
-    return new Promise((resolve) => {
-      const caixa = elTxt.parentElement;
-      if (menosMovimento()) { elTxt.textContent = final; resolve(); return; }
-      caixa.classList.add("ativo");
-      const passos = 16 + Math.floor(Math.random() * 6);
-      let i = 0;
-      const prox = () => {
-        i++;
-        if (i >= passos) {
-          elTxt.textContent = final;
-          elTxt.classList.remove("rola");
-          elTxt.classList.add("trava");
-          caixa.classList.remove("ativo");
-          somTrava();
-          setTimeout(() => elTxt.classList.remove("trava"), 500);
-          resolve();
-          return;
-        }
-        elTxt.textContent = sortear(lista);
-        elTxt.classList.remove("rola");
-        void elTxt.offsetWidth;
-        elTxt.classList.add("rola");
-        somSlot();
-        setTimeout(prox, 45 + Math.pow(i / passos, 3) * 260); // freia no final
-      };
-      prox();
-    });
-  }
-
   /* ---------- Confete (canvas próprio) ---------- */
   const canvas = $("confete");
   const ctx = canvas.getContext("2d");
@@ -306,7 +267,7 @@
 
   /* ---------- Histórico ---------- */
   const valido = (h) => !!h && typeof h === "object" && typeof h.quando === "number" &&
-    ["produto", "publico", "reviravolta"].every((k) => typeof h[k] === "string");
+    typeof h.produto === "string";
   let historico = ler(CHAVE_HIST, []);
   historico = Array.isArray(historico) ? historico.filter(valido) : [];
   let jaSorteados = ler(CHAVE_SESSAO, [], "sessionStorage");
@@ -333,10 +294,7 @@
         ok.textContent = "✓ missão aceita";
         prod.appendChild(ok);
       }
-      const det = document.createElement("span");
-      det.className = "h-det";
-      det.textContent = `${h.publico} · ${h.reviravolta}`;
-      li.append(hora, prod, det);
+      li.append(hora, prod);
       ol.appendChild(li);
     });
     $("histVazio").hidden = historico.length > 0;
@@ -356,31 +314,24 @@
   });
 
   /* ---------- Sorteio ---------- */
-  const estado = { produto: "", publico: "", reviravolta: "", trocas: {}, id: 0 };
+  const estado = { produto: "", trocas: {}, id: 0 };
   const btnGirar = $("btnGirar");
   const botoesTrocar = document.querySelectorAll(".btn-trocar");
 
   // Produtos que podem sair agora (respeita "não repetir" e evita o atual ao trocar).
-  // Ao trocar o produto, `base` é o tema atual, para o público e a reviravolta continuarem combinando.
-  function poolProdutos(excluir, base = produtos) {
-    let pool = base.filter((p) => p !== excluir);
-    if (!pool.length) pool = base.slice();
+  function poolProdutos(excluir) {
+    let pool = produtos.filter((p) => p !== excluir);
     if (chkNaoRepetir.checked) {
       const usados = new Set(jaSorteados);
       const livres = pool.filter((p) => !usados.has(p));
       if (livres.length) pool = livres;
-      else if (base === produtos) {
+      else {
         jaSorteados = [];
         avisar("Todos os produtos já saíram! A lista recomeçou.");
-      } else avisar("Todos os produtos deste tema já saíram, então este pode repetir.");
+      }
     }
     return pool;
   }
-  // Sorteia do tema evitando o item atual (se o tema tiver só um, repete).
-  const sortearOutro = (lista, atual) => {
-    const outros = lista.filter((x) => x !== atual);
-    return sortear(outros.length ? outros : lista);
-  };
 
   function travar(sim) {
     girando = sim;
@@ -405,9 +356,6 @@
     anunciar("Girando a roleta...");
     estado.produto = sortear(poolProdutos());
     marcarSorteado(estado.produto);
-    const tema = temaDe.get(estado.produto);
-    estado.publico = sortear(tema.publicos);
-    estado.reviravolta = sortear(tema.reviravoltas);
 
     await girarRoda(estado.produto);
     confete();
@@ -417,21 +365,16 @@
     // reinicia a animação de entrada do cartão
     $("resultado").style.animation = "none"; void $("resultado").offsetWidth; $("resultado").style.animation = "";
     mostrarProduto();
-    $("valPublico").textContent = "…";
-    $("valReviravolta").textContent = "…";
     if (window.innerWidth < 900 && !document.body.classList.contains("projetor")) {
       $("resultado").scrollIntoView({ behavior: menosMovimento() ? "auto" : "smooth", block: "start" });
     }
-    await girarSlot($("valPublico"), tema.publicos, estado.publico);
-    await girarSlot($("valReviravolta"), tema.reviravoltas, estado.reviravolta);
-
     estado.id = Date.now();
-    historico.unshift({ id: estado.id, quando: estado.id, produto: estado.produto, publico: estado.publico, reviravolta: estado.reviravolta, aceito: false });
+    historico.unshift({ id: estado.id, quando: estado.id, produto: estado.produto, aceito: false });
     salvarHistorico();
     travar(false);
     // o botão desativado perde o foco; devolve para quem usa teclado
     if (document.activeElement === document.body) btnGirar.focus({ preventScroll: true });
-    anunciar(`Sorteado:${estado.produto}, ${estado.publico}, que ${estado.reviravolta}.`);
+    anunciar(`Produto sorteado: ${estado.produto}.`);
   }
 
   async function trocar(parte) {
@@ -441,24 +384,17 @@
     btn.classList.add("usado");
     btn.textContent = "Trocado";
     travar(true);
-    const tema = temaDe.get(estado.produto);
-    if (parte === "produto") {
-      estado.produto = sortear(poolProdutos(estado.produto, tema.produtos));
-      marcarSorteado(estado.produto);
-      await girarRoda(estado.produto);
-      confete();
-      somVitoria();
-      mostrarProduto();
-    } else {
-      const lista = tema[LISTA_DA_PARTE[parte]];
-      estado[parte] = sortearOutro(lista, estado[parte]);
-      await girarSlot($(parte === "publico" ? "valPublico" : "valReviravolta"), lista, estado[parte]);
-    }
+    estado.produto = sortear(poolProdutos(estado.produto));
+    marcarSorteado(estado.produto);
+    await girarRoda(estado.produto);
+    confete();
+    somVitoria();
+    mostrarProduto();
     const h = historico.find((x) => x.id === estado.id);
     if (h) { h[parte] = estado[parte]; salvarHistorico(); }
     travar(false);
     if (document.activeElement === document.body || document.activeElement.disabled) $("btnAceitar").focus({ preventScroll: true });
-    anunciar(`Nova parte sorteada:${estado[parte]}.`);
+    anunciar(`Novo produto sorteado: ${estado.produto}.`);
   }
 
   btnGirar.addEventListener("click", sortearTudo);
@@ -478,8 +414,6 @@
     if (girando) return;
     if (document.body.classList.contains("projetor")) alternarProjetor();
     $("mProduto").textContent = estado.produto;
-    $("mPublico").textContent = estado.publico;
-    $("mReviravolta").textContent = estado.reviravolta;
     if (missaoAceita !== estado.id) {
       missaoAceita = estado.id;
       $("listaIdeias").textContent = "";
@@ -544,18 +478,16 @@
   /* Copiar missão */
   function textoMissao() {
     return [
-      "🎰 ROLETA DO PRODUTO ABSURDO · Minha missão",
+      "ROLETA DO PRODUTO ABSURDO · Minha missão",
       "",
       `Produto: ${estado.produto}`,
-      `Público-alvo: ${estado.publico}`,
-      `Reviravolta: ${estado.reviravolta}`,
       "",
-      "Crie no Canva uma apresentação de 6 slides vendendo seu produto:",
+      "Crie no Canva uma apresentação de 6 slides vendendo seu produto. Convença a turma de que ele vale a pena!",
       "1. Capa: nome do produto + logo",
       "2. O problema que ele resolve",
       "3. Como funciona",
-      "4. Para quem é (o público sorteado)",
-      "5. A reviravolta e como o produto lida com ela",
+      "4. Para quem é (você escolhe o público)",
+      "5. Por que comprar: o argumento que convence até quem duvida",
       "6. Preço, slogan e um anúncio final",
       "",
       "Regras da IA:",
@@ -595,18 +527,20 @@
   const PALETAS = ["tons pastel de rosa e azul-bebê", "roxo e amarelo vibrantes", "verde-água e coral", "laranja, vermelho e creme", "azul-marinho com detalhes dourados", "cores neon sobre fundo escuro", "preto e branco com um único detalhe vermelho"];
   const ENQUADRAMENTOS = ["close-up centralizado", "plano aberto mostrando o ambiente", "vista de cima (plano zenital)", "ângulo de baixo para cima, deixando o produto heroico", "plano médio com o produto em primeiro plano", "vista em três quartos (diagonal)"];
   const LUZES = ["luz suave de janela", "luz dramática de palco", "luz de pôr do sol", "iluminação de estúdio com fundo liso", "brilho mágico ao redor"];
+  const PESSOAS = ["uma família", "um vendedor muito animado", "uma avó sorridente", "um grupo de amigos", "um cientista de jaleco", "um atleta suado"];
+  const REACOES = ["muito impressionados", "aplaudindo de pé", "chorando de emoção", "espantados"];
   const CENARIOS = ["numa sala de aula", "numa cozinha aconchegante", "no pampa gaúcho ao entardecer", "numa vitrine de loja", "no espaço sideral", "num quarto bagunçado", "numa praça da cidade"];
 
   function gerarIdeias() {
-    const prod = estado.produto.charAt(0).toLowerCase() + estado.produto.slice(1);
-    const quem = estado.publico.replace(/^para\s+/i, "");
+    // entre aspas e sem mudar maiúsculas: funciona para objetos, comidas e serviços (e não estraga "GPS")
+    const prod = `‘${estado.produto}’`;
     const [e1, e2, e3] = embaralhar(ESTILOS);
     const [p1, p2, p3] = embaralhar(PALETAS);
     const [q1, q2, q3] = embaralhar(ENQUADRAMENTOS);
     return [
-      { tipo: "Imagem do produto (capa)", txt: `${e1} de ${prod}, ${q1}, ${sortear(LUZES)}, paleta em ${p1}, fundo simples, sem texto na imagem.` },
-      { tipo: "Cena de uso (público)", txt: `${e2} mostrando ${quem} usando ${prod} ${sortear(CENARIOS)}, expressões alegres, ${q2}, cores em ${p2}.` },
-      { tipo: "Cena da reviravolta", txt: `${e3} de ${prod} numa situação em que o produto ${estado.reviravolta}, clima divertido e exagerado, ${q3}, ${sortear(LUZES)}, paleta em ${p3}.` }
+      { tipo: "Imagem do produto (capa)", txt: `${e1} da embalagem do produto ${prod}, ${q1}, ${sortear(LUZES)}, paleta em ${p1}, fundo simples, sem texto na imagem.` },
+      { tipo: "Cena de uso", txt: `${e2} mostrando ${sortear(PESSOAS)} se divertindo com o produto ${prod} ${sortear(CENARIOS)}, expressões alegres, ${q2}, cores em ${p2}.` },
+      { tipo: "Anúncio exagerado", txt: `${e3} de um comercial do produto ${prod}, com clientes ${sortear(REACOES)}, clima divertido e exagerado, ${q3}, ${sortear(LUZES)}, paleta em ${p3}.` }
     ].map((i) => ({ ...i, txt: i.txt.charAt(0).toUpperCase() + i.txt.slice(1) }));
   }
   $("btnIdeias").addEventListener("click", () => {

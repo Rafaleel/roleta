@@ -171,24 +171,12 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 .parte:first-of-type { border-top: 0; padding-top: 4px; }
 .parte .etiqueta { grid-area: et; justify-self: start; }
 .parte .btn-trocar { grid-area: bt; }
-.parte > p, .parte .slot { grid-area: val; }
+.parte > p { grid-area: val; }
 .etiqueta { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--escuro); }
 .e-produto { background: var(--amarelo); }
-.e-publico { background: var(--turquesa); }
-.e-reviravolta { background: var(--coral); }
 .val-produto { margin: 0; font-family: var(--fonte-titulo); font-weight: 700; font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.15; color: var(--amarelo); }
 .val-produto.novo { animation: pop .5s cubic-bezier(.2, 1.6, .4, 1); }
 @keyframes pop { from { transform: scale(.6); opacity: 0; } }
-.slot { position: relative; overflow: hidden; border-radius: 14px; background: rgba(0, 0, 0, .28); box-shadow: inset 0 4px 12px rgba(0, 0, 0, .4); padding: 10px 14px; min-height: 52px; display: flex; align-items: center; }
-.slot::before, .slot::after { content: ""; position: absolute; left: 0; right: 0; height: 12px; z-index: 1; pointer-events: none; }
-.slot::before { top: 0; background: linear-gradient(rgba(0, 0, 0, .45), transparent); }
-.slot::after { bottom: 0; background: linear-gradient(transparent, rgba(0, 0, 0, .45)); }
-.slot-txt { margin: 0; font-weight: 600; font-size: 1.1rem; }
-.slot-txt.rola { animation: rola .09s linear; }
-.slot-txt.trava { animation: trava .45s cubic-bezier(.2, 1.8, .4, 1); }
-@keyframes rola { from { transform: translateY(-100%); filter: blur(2px); } }
-@keyframes trava { from { transform: translateY(-60%); } }
-.slot.ativo { box-shadow: inset 0 4px 12px rgba(0, 0, 0, .4), 0 0 0 2px var(--amarelo); }
 .btn-trocar {
   min-height: 40px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--card-borda);
   background: rgba(255, 255, 255, .1); color: var(--texto); font-weight: 600; font-size: .9rem; cursor: pointer;
@@ -205,7 +193,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 .missao-topo { text-align: center; margin-bottom: 16px; }
 .missao-sorteio { display: grid; gap: 14px; margin-bottom: 18px; background: linear-gradient(135deg, rgba(139, 92, 246, .35), rgba(255, 107, 107, .22)), var(--card); }
 .missao-sorteio p { margin: 6px 0 0; font-size: 1.15rem; font-weight: 600; }
-.missao-sorteio .m-produto { font-family: var(--fonte-titulo); font-size: clamp(1.6rem, 6vw, 2.4rem); color: var(--amarelo); line-height: 1.1; }
+.missao-sorteio .m-produto { font-family: var(--fonte-titulo); font-size: clamp(1.8rem, 7vw, 3.2rem); color: var(--amarelo); line-height: 1.1; }
 .missao-grade { display: grid; gap: 16px; }
 .missao-grade > .cartao, .ideias, .missao-sorteio { animation: entra .6s cubic-bezier(.2, 1.4, .4, 1) both; }
 .missao-grade > .cartao:nth-child(2) { animation-delay: .08s; }
@@ -260,7 +248,6 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 .lista-hist .hora { grid-row: span 2; font-size: .8rem; color: var(--texto-suave); font-variant-numeric: tabular-nums; padding-top: 2px; }
 .lista-hist .h-prod { font-weight: 700; color: var(--amarelo); }
 .lista-hist .h-prod .ok { color: var(--turquesa); font-size: .8rem; margin-left: 6px; white-space: nowrap; }
-.lista-hist .h-det { font-size: .9rem; color: var(--texto-suave); }
 .hist-vazio { margin: 0; color: var(--texto-suave); }
 
 .rodape { text-align: center; padding: 18px 16px 26px; font-size: .85rem; color: var(--texto-suave); opacity: .8; }
@@ -277,7 +264,6 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 @media (min-width: 900px) {
   .tela-roleta { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; padding-top: 10px; }
   .col-resultado { position: sticky; top: 16px; margin-top: 90px; }
-  .missao-sorteio { grid-template-columns: 1.3fr 1fr 1fr; align-items: start; }
   .missao-grade { grid-template-columns: 1fr 1fr; }
 }
 @media (min-width: 1400px) {
@@ -301,7 +287,6 @@ body.projetor .placeholder { font-size: clamp(1.1rem, 1.6vw, 2rem); }
 body.projetor .val-produto { font-size: clamp(1.8rem, min(3.6vw, 5.2vh), 4.6rem); }
 body.projetor .parte { padding: clamp(6px, 1.3vh, 14px) 0; }
 body.projetor .resultado .dica { margin: 2px 0 6px; }
-body.projetor .slot-txt { font-size: clamp(1.2rem, min(2vw, 3.6vh), 2.6rem); }
 body.projetor .etiqueta { font-size: clamp(.8rem, 1vw, 1.3rem); }
 body.projetor .btn-trocar, body.projetor .dica { font-size: clamp(.9rem, 1.1vw, 1.4rem); }
 body.projetor .btn-aceitar { font-size: clamp(1.2rem, 1.6vw, 2rem); min-height: 72px; }
