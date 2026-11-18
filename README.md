@@ -41,23 +41,24 @@ O site não precisa de instalação nem de compilação: são só HTML, CSS e Ja
 
 Abra o `data.js` em qualquer editor de texto. Você também pode editar direto no GitHub: abra o arquivo e clique no lápis ✏️.
 
-Ele tem três listas: `produtos`, `publicos` e `reviravoltas`. Cada item fica entre aspas e termina com vírgula:
+A lista é dividida em **temas** (Escola, Comida, Animais, Espaço...). Cada tema tem três listas: `produtos`, `publicos` e `reviravoltas`. A roleta sorteia um produto de qualquer tema; o público-alvo e a reviravolta saem **só do mesmo tema**, para a combinação fazer sentido. O "Trocar" do produto troca por outro produto do mesmo tema.
 
 ```js
-produtos: [
-  "Refrigerante sabor chimarrão",
-  "Tênis que anda sozinho até a escola",
-  "Meu produto novo aqui",
-  ...
-],
+{
+  nome: "Banho e cuidados",
+  produtos: ["Patinho de borracha detetive", "Meu produto novo aqui", ...],
+  publicos: ["para crianças que odeiam tomar banho", ...],
+  reviravoltas: ["precisa funcionar debaixo d'água", ...]
+},
 ```
 
 Cuidados:
 
-- Mantenha as **aspas** e a **vírgula** no fim de cada linha. O último item da lista pode ficar sem vírgula.
-- Se a frase tiver aspas duplas dentro, use aspas simples, por exemplo: `"Garrafa d'água"`.
-- Comece cada **público** com "para ..." (ex.: `"para gatos executivos"`).
-- Escreva cada **reviravolta** como uma condição (ex.: `"só funciona em dias de chuva"`).
+- Coloque o produto novo no tema em que ele combina.
+- Mantenha as **aspas** e a **vírgula** no fim de cada linha.
+- Cada tema precisa de pelo menos 4 produtos, 6 públicos e 6 reviravoltas.
+- Um produto não pode estar em dois temas.
+- Comece cada **público** com "para ..." e escreva cada **reviravolta** completando "O produto ..." (ex.: `"só funciona em dias de chuva"`).
 
 Depois de salvar no GitHub, o site se atualiza sozinho em 1 ou 2 minutos.
 

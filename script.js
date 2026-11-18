@@ -1,8 +1,15 @@
 (() => {
   "use strict";
 
-  const { produtos, publicos, reviravoltas } = window.DADOS;
-  const LISTAS = { produto: produtos, publico: publicos, reviravolta: reviravoltas };
+  // O produto define o tema; público e reviravolta saem só do tema dele.
+  const { temas } = window.DADOS;
+  const produtos = temas.flatMap((t) => t.produtos);
+  const temaDe = new Map();
+  temas.forEach((t) => t.produtos.forEach((p) => {
+    console.assert(!temaDe.has(p), "produto em dois temas: " + p);
+    temaDe.set(p, t);
+  }));
+  const LISTA_DA_PARTE = { publico: "publicos", reviravolta: "reviravoltas" };
   const N_FATIAS = Math.min(14, produtos.length); // entre 12 e 16 fatias por giro
   const PASSO = 360 / N_FATIAS;
   const CORES = [
@@ -347,19 +354,26 @@
   const botoesTrocar = document.querySelectorAll(".btn-trocar");
 
   // Produtos que podem sair agora (respeita "não repetir" e evita o atual ao trocar).
-  function poolProdutos(excluir) {
-    let pool = produtos.filter((p) => p !== excluir);
+  // Ao trocar o produto, `base` é o tema atual, para o público e a reviravolta continuarem combinando.
+  function poolProdutos(excluir, base = produtos) {
+    let pool = base.filter((p) => p !== excluir);
+    if (!pool.length) pool = base.slice();
     if (chkNaoRepetir.checked) {
       const usados = new Set(jaSorteados);
       const livres = pool.filter((p) => !usados.has(p));
       if (livres.length) pool = livres;
-      else {
+      else if (base === produtos) {
         jaSorteados = [];
         avisar("Todos os produtos já saíram! A lista recomeçou.");
       }
     }
     return pool;
   }
+  // Sorteia do tema evitando o item atual (se o tema tiver só um, repete).
+  const sortearOutro = (lista, atual) => {
+    const outros = lista.filter((x) => x !== atual);
+    return sortear(outros.length ? outros : lista);
+  };
 
   function travar(sim) {
     girando = sim;
@@ -384,8 +398,9 @@
     anunciar("Girando a roleta...");
     estado.produto = sortear(poolProdutos());
     marcarSorteado(estado.produto);
-    estado.publico = sortear(publicos);
-    estado.reviravolta = sortear(reviravoltas);
+    const tema = temaDe.get(estado.produto);
+    estado.publico = sortear(tema.publicos);
+    estado.reviravolta = sortear(tema.reviravoltas);
 
     await girarRoda(estado.produto);
     confete();
@@ -400,8 +415,8 @@
     if (window.innerWidth < 900 && !document.body.classList.contains("projetor")) {
       $("resultado").scrollIntoView({ behavior: menosMovimento() ? "auto" : "smooth", block: "start" });
     }
-    await girarSlot($("valPublico"), publicos, estado.publico);
-    await girarSlot($("valReviravolta"), reviravoltas, estado.reviravolta);
+    await girarSlot($("valPublico"), tema.publicos, estado.publico);
+    await girarSlot($("valReviravolta"), tema.reviravoltas, estado.reviravolta);
 
     estado.id = Date.now();
     historico.unshift({ id: estado.id, quando: estado.id, produto: estado.produto, publico: estado.publico, reviravolta: estado.reviravolta, aceito: false });
@@ -419,17 +434,17 @@
     btn.classList.add("usado");
     btn.textContent = "Trocado";
     travar(true);
+    const tema = temaDe.get(estado.produto);
     if (parte === "produto") {
-      estado.produto = sortear(poolProdutos(estado.produto));
+      estado.produto = sortear(poolProdutos(estado.produto, tema.produtos));
       marcarSorteado(estado.produto);
       await girarRoda(estado.produto);
       confete();
       somVitoria();
       mostrarProduto();
     } else {
-      const lista = LISTAS[parte];
-      const atual = estado[parte];
-      estado[parte] = sortear(lista.filter((x) => x !== atual));
+      const lista = tema[LISTA_DA_PARTE[parte]];
+      estado[parte] = sortearOutro(lista, estado[parte]);
       await girarSlot($(parte === "publico" ? "valPublico" : "valReviravolta"), lista, estado[parte]);
     }
     const h = historico.find((x) => x.id === estado.id);
