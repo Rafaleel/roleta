@@ -43,16 +43,19 @@
   let audio = null;
   function tom(freq, inicio, dur, tipo = "triangle", vol = 0.15) {
     if (!somLigado || !audio) return;
-    const t = audio.currentTime + inicio;
-    const osc = audio.createOscillator();
-    const g = audio.createGain();
-    osc.type = tipo;
-    osc.frequency.setValueAtTime(freq, t);
-    g.gain.setValueAtTime(vol, t);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    osc.connect(g).connect(audio.destination);
-    osc.start(t);
-    osc.stop(t + dur + 0.02);
+    try {
+      const t = audio.currentTime + inicio;
+      const osc = audio.createOscillator();
+      const g = audio.createGain();
+      osc.type = tipo;
+      osc.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(vol, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      osc.connect(g);
+      g.connect(audio.destination);
+      osc.start(t);
+      osc.stop(t + dur + 0.02);
+    } catch (e) { /* falha de áudio nunca pode travar o giro */ }
   }
   const somTick = () => tom(1400, 0, 0.035, "square", 0.05);
   const somSlot = () => tom(700, 0, 0.03, "square", 0.03);
