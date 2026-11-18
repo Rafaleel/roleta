@@ -97,7 +97,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 /* Tela da roleta */
 .tela-roleta { display: grid; gap: 24px; align-items: start; }
 .col-roda { text-align: center; }
-.roda-wrap { position: relative; width: min(92vw, 520px); margin: 18px auto 20px; aspect-ratio: 1; }
+.roda-wrap { position: relative; width: min(92vw, 520px); margin: 44px auto 20px; aspect-ratio: 1; } /* margem > altura que o ponteiro sobe */
 .roda { width: 100%; height: 100%; display: block; filter: drop-shadow(6px 6px 0 rgba(29, 29, 27, .9)); }
 .roda-wrap::after { /* aro externo */
   content: ""; position: absolute; inset: -6px; border-radius: 50%; pointer-events: none;
@@ -187,6 +187,10 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 .btn-trocar:disabled { opacity: .45; cursor: not-allowed; }
 .btn-trocar.usado::before { content: "✓ "; }
 .dica { margin: 4px 0 10px; font-size: .85rem; color: var(--texto-suave); }
+.pense { margin: 4px 0 16px; padding: 12px 16px; border: 2px dashed var(--card-borda); border-radius: 12px; background: var(--bg); }
+.pense-titulo { margin: 0 0 6px; font-family: var(--fonte-titulo); font-size: 1rem; color: var(--terracota); }
+.pense ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.pense li::marker { color: var(--terracota); }
 
 /* Tela da missão */
 .tela-missao { animation: entra .6s cubic-bezier(.2, 1.4, .4, 1) both; }
@@ -263,7 +267,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; }
 /* Notebook e telas largas */
 @media (min-width: 900px) {
   .tela-roleta { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; padding-top: 10px; }
-  .col-resultado { position: sticky; top: 16px; margin-top: 90px; }
+  .tela-roleta { align-items: center; }
   .missao-grade { grid-template-columns: 1fr 1fr; }
 }
 @media (min-width: 1400px) {
@@ -288,7 +292,8 @@ body.projetor .val-produto { font-size: clamp(1.8rem, min(3.6vw, 5.2vh), 4.6rem)
 body.projetor .parte { padding: clamp(6px, 1.3vh, 14px) 0; }
 body.projetor .resultado .dica { margin: 2px 0 6px; }
 body.projetor .etiqueta { font-size: clamp(.8rem, 1vw, 1.3rem); }
-body.projetor .btn-trocar, body.projetor .dica { font-size: clamp(.9rem, 1.1vw, 1.4rem); }
+body.projetor .btn-trocar, body.projetor .dica, body.projetor .pense { font-size: clamp(.9rem, 1.1vw, 1.4rem); }
+body.projetor .pense-titulo { font-size: 1.1em; }
 body.projetor .btn-aceitar { font-size: clamp(1.2rem, 1.6vw, 2rem); min-height: 72px; }
 body.projetor .cartao { padding: clamp(20px, 2vw, 40px); }
 @media (max-width: 899px) {
